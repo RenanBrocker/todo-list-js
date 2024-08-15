@@ -9,12 +9,25 @@ body {
 }
 
 .container {
+    display: flex;
+    flex-direction: column;
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 300px;
     text-align: center;
+}
+
+.todo-section {
+    margin-bottom: 20px;
+}
+
+.filters-section {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
@@ -62,7 +75,6 @@ li {
 }
 
 li.completed {
-    text-decoration: none; /* Removido aqui */
     color: grey;
 }
 
@@ -77,7 +89,19 @@ li button {
     color: white;
     padding: 5px 10px;
     border-radius: 3px;
-    cursor: pointer;    
+    cursor: pointer;
+    margin-left: 5px;
+    width: 80px;    
+}
+
+li button:first-child {
+    margin-left: 0; /* Remove margem esquerda do primeiro botão */
+}
+
+li span {
+    flex-grow: 1; /* Faz o texto da tarefa ocupar o máximo de espaço disponível */
+    text-align: left; /* Alinha o texto à esquerda */
+
 }
 
 li button:hover {

@@ -5,6 +5,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('Script carregado e DOM pronto'); // Log para verificar se o script está carregado
 
+    document.getElementById('filter-all').addEventListener('click', () => {
+        displayTasks('all');
+    });
+
+    document.getElementById('filter-active').addEventListener('click', () => {
+        displayTasks('active');
+    });
+
+    document.getElementById('filter-completed').addEventListener('click', () => {
+        displayTasks('completed');
+    });
+
     form.addEventListener('submit', (e) => {
         e.preventDefault(); // Evita o comportamento padrão de enviar o formulário
         const taskValue = newTaskInput.value.trim(); // A variável deve ser chamada "taskValue"
@@ -19,8 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-        function addTask(taskValue) {
-            const li = document.createElement('li'); // Cria um novo elemento de lista
+    function addTask(taskValue) {
+        const li = document.createElement('li'); // Cria um novo elemento de lista
         //li.textContent = task; // Define o texto do novo elemento como a tarefa
         
         const taskText = document.createElement('span');
@@ -38,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
         deleteButton.textContent = 'Delete'; // Define o texto do botão
         deleteButton.addEventListener('click', () => { // Adiciona um evento de clique
             li.remove();
-            //taskList.removeChild(li); // Remove o elemento de lista
         });
 
         li.appendChild(completeButton); // Adiciona o botão "Complete" ao elemento de lista
@@ -46,5 +57,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
         taskList.appendChild(li); // Adiciona o novo elemento de lista à lista de tarefas
         console.log('Tarefa adicionada:', taskValue); // Log para verificar se a tarefa foi adicionada
+    }
+
+    function displayTasks(filter) {
+        const task = document.querySelectorAll('#task-list li');
+        task.forEach(task => {
+            switch(filter) {
+                case 'all':
+                    task.style.display = 'block';
+                    break;
+                case 'active':
+                    if (!task.classList.contains('completed')) {
+                        task.style.display = 'block';
+                    } else {
+                        task.style.display = 'none';
+                    }
+                    break;
+                case 'completed':
+                    if (task.classList.contains('completed')) {
+                        task.style.display = 'block';
+                    } else {
+                        task.style.display = 'none';
+                    }
+                    break;
+            }
+        })
     }
 });
